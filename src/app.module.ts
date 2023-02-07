@@ -1,11 +1,16 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
-import { TodosModule } from './todos/todos.module';
-
 @Module({
-  imports: [TodosModule, ProductsModule],
+  imports: [
+    ProductsModule,
+    MongooseModule.forRoot('mongodb://127.0.0.1/product', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
